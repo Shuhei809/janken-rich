@@ -64,4 +64,33 @@ function determineWinner() {
     } else {
         $('.result').text('勝ち')
     }
+    
+    
+    // 勝負回数取得
+    let count = localStorage.getItem("matchCount");
+    if (count === null) {
+        count = 0;
+    } else {
+        count = parseInt(count); //整数にする
+    }
+
+
+     // カウントをインクリメント
+    count += 1;
+
+     // key Valueを定義
+    const key = `勝負${count}回目`;
+    const value = $(".result").text();
+
+    localStorage.setItem(key, value);
+    
+    const html = `
+      <li>
+        <p>${key}</p>
+        <p>${value}</p>
+      </li>
+      `;
+    $("#list").append(html);
+
+    localStorage.setItem("matchCount", count);
 }
